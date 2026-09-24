@@ -1,0 +1,39 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="ERD" id="erd-tab">
+    <mxGraphModel dx="900" dy="700" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="700" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="entUser" value="&lt;b&gt;User&lt;/b&gt;&lt;hr size=1&gt;user_id (PK)&lt;br&gt;full_name&lt;br&gt;email&lt;br&gt;password_hash&lt;br&gt;created_at" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fillColor=#dae8fc;strokeColor=#6c8ebf;" vertex="1" parent="1">
+          <mxGeometry x="420" y="40" width="200" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="entCouple" value="&lt;b&gt;Couple&lt;/b&gt;&lt;hr size=1&gt;couple_id (PK)&lt;br&gt;partner_a_id (FK)&lt;br&gt;partner_b_id (FK)&lt;br&gt;status&lt;br&gt;created_at" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fillColor=#e1d5e7;strokeColor=#9673a6;" vertex="1" parent="1">
+          <mxGeometry x="150" y="260" width="220" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="entCapsule" value="&lt;b&gt;TimeCapsule&lt;/b&gt;&lt;hr size=1&gt;capsule_id (PK)&lt;br&gt;couple_id (FK)&lt;br&gt;lock_date&lt;br&gt;unlock_date&lt;br&gt;status&lt;br&gt;created_at" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fillColor=#d5e8d4;strokeColor=#82b366;" vertex="1" parent="1">
+          <mxGeometry x="460" y="260" width="220" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="entLetter" value="&lt;b&gt;Letter&lt;/b&gt;&lt;hr size=1&gt;letter_id (PK)&lt;br&gt;capsule_id (FK)&lt;br&gt;author_id (FK)&lt;br&gt;content_encrypted&lt;br&gt;created_at" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fillColor=#ffe6cc;strokeColor=#d79b00;" vertex="1" parent="1">
+          <mxGeometry x="780" y="140" width="200" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="entResponse" value="&lt;b&gt;UnlockResponse&lt;/b&gt;&lt;hr size=1&gt;response_id (PK)&lt;br&gt;capsule_id (FK)&lt;br&gt;user_id (FK)&lt;br&gt;decision&lt;br&gt;responded_at" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="780" y="310" width="220" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="entNotification" value="&lt;b&gt;Notification&lt;/b&gt;&lt;hr size=1&gt;notification_id (PK)&lt;br&gt;capsule_id (FK)&lt;br&gt;user_id (FK)&lt;br&gt;type&lt;br&gt;sent_at&lt;br&gt;is_read" style="rounded=0;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacing=6;fillColor=#f8cecc;strokeColor=#b85450;" vertex="1" parent="1">
+          <mxGeometry x="780" y="480" width="220" height="140" as="geometry" />
+        </mxCell>
+
+        <mxCell id="r1" value="1..M (as Partner A)" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;startArrow=none;fontSize=9;exitX=0.25;exitY=1;entryX=0.5;entryY=0;" edge="1" parent="1" source="entUser" target="entCouple"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r2" value="1..M (as Partner B)" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;startArrow=none;fontSize=9;exitX=0.75;exitY=1;entryX=0.9;entryY=0;" edge="1" parent="1" source="entUser" target="entCouple"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r3" value="1..M" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;startArrow=none;fontSize=9;" edge="1" parent="1" source="entCouple" target="entCapsule"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r4" value="1..M" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;startArrow=none;fontSize=9;" edge="1" parent="1" source="entCapsule" target="entLetter"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r5" value="1..M (author)" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;startArrow=none;fontSize=9;" edge="1" parent="1" source="entUser" target="entLetter"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r6" value="1..M" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;startArrow=none;fontSize=9;" edge="1" parent="1" source="entCapsule" target="entResponse"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r7" value="1..M" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;startArrow=none;fontSize=9;" edge="1" parent="1" source="entUser" target="entResponse"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r8" value="1..M" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;startArrow=none;fontSize=9;" edge="1" parent="1" source="entCapsule" target="entNotification"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="r9" value="1..M" style="edgeStyle=orthogonalEdgeStyle;html=1;endArrow=none;startArrow=none;fontSize=9;" edge="1" parent="1" source="entUser" target="entNotification"><mxGeometry relative="1" as="geometry" /></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
